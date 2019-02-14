@@ -38,6 +38,10 @@ int main() {
 			CheckHand(player, computer);
 		}
 		printf("\n現在の戦績： %d 勝、%d 負、%d 引き分け！\n", win, loose, draw);
+
+		if (player > PA) {
+			break;
+		}
 	}
 	return 0;
 }
@@ -47,17 +51,18 @@ void CheckHand(int player, int comp) {
 	case GU:
 		switch (comp)
 		{
-		default://case GU:
-			printf("引き分け\n");
-			draw++;
-			break;
+		
 		case CHOKI:
-			printf("勝ち\n");
+			printf("-------勝ち-------\n");
 			win++;
 			break;
 		case PA:
-			printf("負け\n");
+			printf("-------負け-------\n");
 			loose++;
+			break;
+		default:
+			printf("------引き分け------\n");
+			draw++;
 			break;
 		}
 		break;
@@ -65,32 +70,33 @@ void CheckHand(int player, int comp) {
 		switch (comp)
 		{
 		case GU:
-			printf("負け\n");
+			printf("-------負け-------\n");
 			loose++;
 			break;
-		default: //case CHOKI:
-			printf("引き分け\n");
-			draw++;
-			break;
 		case PA:
-			printf("勝ち\n");
+			printf("-------勝ち-------\n");
 			win++;
 			break;
+		default:
+			printf("------引き分け------\n");
+			draw++;
+			break;
+		
 		}
 		break;
 	case PA:
 		switch (comp)
 		{
 		case GU:
-			printf("勝ち\n");
+			printf("-------勝ち-------\n");
 			win++;
 			break;
 		case CHOKI:
-			printf("負け\n");
+			printf("-------負け-------\n");
 			loose++;
 			break;
-		default://case PA:
-			printf("引き分け\n");
+		default:
+			printf("------引き分け------\n");
 			draw++;
 			break;
 		}
