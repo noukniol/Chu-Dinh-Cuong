@@ -18,7 +18,7 @@ int main() {
 
 	int player, computer;
 
-	char hand[4][10] = { "未選択","グー","チョキ","パー" };
+	char hand[4][7] = { "未選択","グー","チョキ","パー" };
 
 	while (1)
 	{
@@ -37,7 +37,7 @@ int main() {
 
 			CheckHand(player, computer);
 		}
-		printf("\n現在の戦績： %d 勝、%d 負、%d 引き分け！\n", win, loose, draw);
+		printf("\n現在の戦績： %d 勝、%d 敗、%d 引き分け！\n", win, loose, draw);
 
 		if (player > PA) {
 			break;
