@@ -8,7 +8,7 @@ enum MESSAGE {
 };
 void CheckHand(int player, int comp);
 
-int win = 0, loose = 0, draw = 0;
+int senseki[3] = { 0,0,0 };
 
 int main() {
 
@@ -29,11 +29,11 @@ int main() {
 		{
 			srand((unsigned int)time(NULL));
 			computer = rand() % 3 + 1;
-			printf("プレヤーの手： %s \nコンピューターの手： %s \n", hand[player], hand[computer]);
+			printf("プレヤーの手： %s \nコンピューターの手： %s \n", 
+				hand[player], hand[computer]);
 
 			CheckHand(player, computer);
 		}
-		printf("\n現在の戦績： %d 勝、%d 敗、%d 引き分け！\n", win, loose, draw);
 
 		if (player > OVER) {
 			break;
@@ -46,17 +46,8 @@ void CheckHand(int player, int comp) {
 	char message[3][9] = { "引き分け","負け","勝ち" };
 	int result = (player - comp + 3) % 3;
 	printf("%s", message[result]);
-
-	switch (result)
-	{
-	case DRAW:
-		draw++;
-		break;
-	case LOOSE:
-		loose++;
-		break;
-	case WIN:
-		win++;
-		break;
-	}
+	
+	senseki[result]++;
+	printf("\n現在の戦績： %d 勝、%d 敗、%d 引き分け！\n", 
+		senseki[WIN],senseki[LOOSE],senseki[DRAW]);
 }
