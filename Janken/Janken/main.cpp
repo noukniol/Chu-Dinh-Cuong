@@ -3,12 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-enum HAND
-{
-	MISENTAKU,
-	GU,
-	CHOKI,
-	PA
+enum MESSAGE {
+	DRAW,LOOSE,WIN,OVER
 };
 void CheckHand(int player, int comp);
 
@@ -26,7 +22,7 @@ int main() {
 		printf("0:未選択、1:グー、2:チョキ、3:パー :->");
 		scanf("%d", &player);
 		
-		if (player == MISENTAKU) {
+		if (player == 0) {
 			printf("再選択してください！\n");
 		}
 		else
@@ -39,67 +35,28 @@ int main() {
 		}
 		printf("\n現在の戦績： %d 勝、%d 敗、%d 引き分け！\n", win, loose, draw);
 
-		if (player > PA) {
+		if (player > OVER) {
 			break;
 		}
 	}
 	return 0;
 }
 void CheckHand(int player, int comp) {
-	switch (player)
+
+	char message[3][9] = { "引き分け","負け","勝ち" };
+	int result = (player - comp + 3) % 3;
+	printf("%s", message[result]);
+
+	switch (result)
 	{
-	case GU:
-		switch (comp)
-		{
-		
-		case CHOKI:
-			printf("-------勝ち-------\n");
-			win++;
-			break;
-		case PA:
-			printf("-------負け-------\n");
-			loose++;
-			break;
-		default:
-			printf("------引き分け------\n");
-			draw++;
-			break;
-		}
+	case DRAW:
+		draw++;
 		break;
-	case CHOKI:
-		switch (comp)
-		{
-		case GU:
-			printf("-------負け-------\n");
-			loose++;
-			break;
-		case PA:
-			printf("-------勝ち-------\n");
-			win++;
-			break;
-		default:
-			printf("------引き分け------\n");
-			draw++;
-			break;
-		
-		}
+	case LOOSE:
+		loose++;
 		break;
-	case PA:
-		switch (comp)
-		{
-		case GU:
-			printf("-------勝ち-------\n");
-			win++;
-			break;
-		case CHOKI:
-			printf("-------負け-------\n");
-			loose++;
-			break;
-		default:
-			printf("------引き分け------\n");
-			draw++;
-			break;
-		}
+	case WIN:
+		win++;
 		break;
 	}
 }
