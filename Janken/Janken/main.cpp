@@ -35,7 +35,7 @@ int main() {
 			CheckHand(player, computer);
 		}
 
-		if (player > OVER) {
+		if (player != NULL) {
 			break;
 		}
 	}
