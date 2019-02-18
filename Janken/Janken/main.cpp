@@ -5,10 +5,10 @@
 #include <time.h>
 
 #define MISENTAKU		0
-#define NUM_OVER		3
 #define RESULT_PATTERN	3
 #define HAND_PATTERN	3
 #define FIX_HAND		1
+#define NUM_OVER		HAND_PATTERN
 
 #define DRAW			0
 #define	WIN				1
