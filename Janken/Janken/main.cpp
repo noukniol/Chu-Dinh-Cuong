@@ -1,53 +1,55 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-enum MESSAGE {
-	DRAW,LOOSE,WIN,OVER
+#define MISENTAKU		0
+#define NUM_OVER		3
+#define RESULT_PATTERN	3
+#define HAND_PATTERN	3
+#define FIX_HAND		1
+
+#define DRAW			0
+#define	WIN				1
+#define LOOSE			2
+
+int checkHand[RESULT_PATTERN][RESULT_PATTERN] = {
+	//Player|Computerグー(0) チョキ(1) パー(2)
+	/*グー(0)*/		{ DRAW,		WIN,	LOOSE },
+	/*チョキ(1)*/	{ LOOSE,	DRAW,	WIN },
+	/*パー(2)*/		{ WIN,		LOOSE,	DRAW },
 };
-void CheckHand(int player, int comp);
-
-int senseki[3] = { 0,0,0 };
-
 int main() {
+	int input, player, computer;
+	const char* message[] = { "引き分け","勝ち","負け" };
+	const char* hand[] = { "グー","チョキ","パー" };
+	int senseki[RESULT_PATTERN] = { NULL };
 
-	int player, computer;
-
-	char hand[4][7] = { "未選択","グー","チョキ","パー" };
-
-	while (1)
+	while (true)
 	{
 		printf("\nジャンケンゲーム！\n");
 		printf("0:未選択、1:グー、2:チョキ、3:パー :->");
-		scanf("%d", &player);
-		
-		if (player == 0) {
-			printf("再選択してください！\n");
+		scanf("%d", &input);
+
+		if (input == MISENTAKU || input > NUM_OVER) {
+			printf("エラー\n");
+			printf("再選択してください!\n");
 		}
-		else
-		{
+		else {
 			srand((unsigned int)time(NULL));
-			computer = rand() % 3 + 1;
-			printf("プレヤーの手： %s \nコンピューターの手： %s \n", 
-				hand[player], hand[computer]);
+			player = input - FIX_HAND;
+			computer = rand() % HAND_PATTERN;
+			printf("プレヤーの手：%s\nコンピューターの手：%s\n", hand[player], hand[computer]);
 
-			CheckHand(player, computer);
+			int result = checkHand[player][computer];
+			printf("%s\n", message[result]);
+
+			senseki[result]++;
+			printf("\n現在の戦績： %d 勝、%d 敗、%d 引き分け！\n",
+				senseki[WIN], senseki[LOOSE], senseki[DRAW]);
 		}
 
-		if (player >OVER) {
-			break;
-		}
 	}
 	return 0;
-}
-void CheckHand(int player, int comp) {
-
-	char message[3][9] = { "引き分け","負け","勝ち" };
-	int result = (player - comp + 3) % 3;
-	printf("%s", message[result]);
-	
-	senseki[result]++;
-	printf("\n現在の戦績： %d 勝、%d 敗、%d 引き分け！\n", 
-		senseki[WIN],senseki[LOOSE],senseki[DRAW]);
 }
