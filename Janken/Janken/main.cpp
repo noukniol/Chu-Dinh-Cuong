@@ -10,10 +10,12 @@
 #define FIX_HAND		1
 #define NUM_OVER		HAND_PATTERN
 
-#define DRAW			0
-#define	WIN				1
-#define LOOSE			2
-
+enum RESULT
+{
+	DRAW,
+	WIN,
+	LOOSE
+};
 int checkHand[RESULT_PATTERN][RESULT_PATTERN] = {
 	//Player|Computerグー(0) チョキ(1) パー(2)
 	/*グー(0)*/		{ DRAW,		WIN,	LOOSE },
@@ -32,7 +34,7 @@ int main() {
 		printf("0:未選択、1:グー、2:チョキ、3:パー :->");
 		scanf("%d", &input);
 
-		if (input == MISENTAKU || input > NUM_OVER) {
+		if (input <= MISENTAKU || input > NUM_OVER) {
 			printf("エラー\n");
 			printf("再選択してください!\n");
 		}
