@@ -60,7 +60,7 @@ int main() {
 		else {
 			srand((unsigned int)time(NULL));
 			player = getHand(input);
-			computer = getHand(rand() % HAND_PATTERN);
+			computer = rand() % HAND_PATTERN;
 			printf("プレヤーの手：%s\nコンピューターの手：%s\n", hand[player], hand[computer]);
 
 			int result = checkHand[player][computer];
